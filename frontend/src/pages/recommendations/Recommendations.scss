@@ -1,0 +1,40 @@
+.frame {
+  //background-color: #ebebeb;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.frame-container {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.image-container {
+  max-height: 300px;
+  width: auto;
+  
+  img {
+    max-height: 100%;
+    width: auto;
+  }
+}
+
+.rating {
+  &.green {
+    color: green;
+  }
+
+  &.yellow {
+    color: #dd9b22;
+  }
+
+  &.red {
+    color: red;
+  }
+
+  &.black {
+    color: black;
+  }
+}

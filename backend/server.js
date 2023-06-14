@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");   //convertim informatii din frotnten
 const cors = require("cors");
 const userRoute = require("./routes/userRoute")
 const destinationRoute = require("./routes/destinationRoute")
+const contactRoute = require("./routes/contactRoute")
 const errorHandler = require("./middleWare/errorMiddleware")
 const cookieParser = require("cookie-parser")
 const path = require("path");
@@ -19,6 +20,12 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({extended: false}))   //handle data coming from url
 app.use(bodyParser.json())
+
+app.use(cors({
+    origin: ["http://localhost:3000", "https://recommandations.vercel.app"],
+    credentials: true
+}))
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads"))) //am linkuit functionalitatea de upload sa pointeze catre folderulkl de uploads
 
 //delete
@@ -39,6 +46,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads"))) //am linkui
 //Routes Middleware
 app.use("/api/users", userRoute);
 app.use("/api/destinations", destinationRoute);
+app.use("/api/contactus", contactRoute);
 
 
 //Routes
@@ -50,7 +58,7 @@ app.get("/", (req, res) =>
 //Error Middleware
 app.use(errorHandler);
 
-
+mongoose.set('strictQuery', false);
 //connect la DB si start server
 mongoose
     .connect(process.env.MONGO_URI)
@@ -62,3 +70,7 @@ mongoose
         })
     })
     .catch((err) => console.log(err))
+
+
+
+    

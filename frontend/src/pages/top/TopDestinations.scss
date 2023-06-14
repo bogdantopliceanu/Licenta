@@ -1,0 +1,30 @@
+.text {
+    &.green {
+      color: green;
+    }
+  
+    &.yellow {
+      color: #dd9b22;
+    }
+  
+    &.red {
+      color: red;
+    }
+  
+    &.black {
+      color: black;
+    }
+  }
+
+
+  .top-destinations {
+    .code-frame {
+      //background-color: #f2f2f2;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  }
+  
+  

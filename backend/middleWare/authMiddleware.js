@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 //next e pentru cazul in care mai este ceva de rulat dupa middleware
 const protect = asyncHandler (async (req, res, next) => {
     try {
-        //berif daca req are un cookie
+        //verif daca req are un cookie
         const token = req.cookies.token_auto_login
         if(!token) {
             res.status(401)
