@@ -71,7 +71,7 @@ const Contact = () => {
               </span>
               <span>
                 <GoLocation />
-                <p>Timisoara, Romania</p>
+                <p>Timișoara, Romania</p>
               </span>
               <span>
                 <FaTwitter />

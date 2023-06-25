@@ -266,39 +266,27 @@ export default Recommendations;
 
 
 
-
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
 import { getUser, getUsersWithSimilarPreferences, getNotCommonDestinations } from '../../services/authService';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDestinations } from '../../redux/features/destination/destinationSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Recommendations.scss';
 
 const Recommendations = () => {
-  const [currentUserDestinations, setCurrentUserDestinations] = useState([]);
   const [destinationAverages, setDestinationAverages] = useState({});
   const allDestinations = useSelector((state) => state.destination.destinations);
   const dispatch = useDispatch();
+  const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
 
   useEffect(() => {
     async function fetchCurrentUserDestinations() {
       const currentUser = await getUser();
-      setCurrentUserDestinations(currentUser.destinations);
-    }
-    fetchCurrentUserDestinations();
-  }, []);
-
-  useEffect(() => {
-    dispatch(getDestinations());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (currentUserDestinations.length > 0) {
-      const getRecommendations = async () => {
+      const currentUserDestinations = currentUser.destinations;
+      
+      if (currentUserDestinations.length >= 3) {
         const usersWithSimilarPreferences = await getUsersWithSimilarPreferences();
         const notCommonDestinationsResponse = await getNotCommonDestinations();
 
@@ -363,11 +351,19 @@ const Recommendations = () => {
         });
 
         setDestinationAverages(newDestinationAverages);
-      };
+      } else {
+        if (!isErrorDisplayed) {
+          toast.info('You need to have at least 3 destinations in your list.', {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+          setIsErrorDisplayed(true);
+        }
+      }
+    };
 
-      getRecommendations();
-    }
-  }, [currentUserDestinations]);
+    fetchCurrentUserDestinations();
+    dispatch(getDestinations());
+  }, [isErrorDisplayed, dispatch]);
 
   return (
     <div className="frame">

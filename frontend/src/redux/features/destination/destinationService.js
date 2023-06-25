@@ -4,13 +4,13 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const API_URL = `${BACKEND_URL}/api/destinations`;
 
-// Create New Product
+// Create New Destination
 const createDestination = async (formData) => {
   const response = await axios.post(API_URL, formData);
   return response.data;
 };
 
-// Get all pdestinations
+// Get all ddestinations
 const getDestinations = async () => {
   const response = await axios.get(API_URL);
   return response.data;

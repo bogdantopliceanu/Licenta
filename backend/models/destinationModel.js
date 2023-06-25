@@ -8,6 +8,11 @@ const destinationSchema = mongoose.Schema({
         requied: [ true, "Please add a name"],
         trim: true
     },
+    country: {
+        type: String,
+        requied: [ true, "Please add a country"],
+        trim: true
+    },
     image:{
         type: Object,
         default: {},

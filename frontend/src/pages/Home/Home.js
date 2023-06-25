@@ -36,7 +36,7 @@ const Home = () => {
         </ul>
       </nav>
 
-      {/* hero section */}
+     
 
       <section className="container hero">
         <div className="hero-text">
@@ -72,3 +72,4 @@ const NumberText = ({ num, text }) => {
 };
 
 export default Home;
+

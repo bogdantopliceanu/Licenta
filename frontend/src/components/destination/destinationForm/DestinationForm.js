@@ -12,8 +12,10 @@ const DestinationForm = ({
   setThings_to_do,
   description,
   setDescription,
+  country,
   handleInputChange,
   handleImageChange,
+  handleCountryChange,
   saveDestination,
 }) => {
   return (
@@ -36,7 +38,7 @@ const DestinationForm = ({
                 <img src={imagePreview} alt="destination" />
               </div>
             ) : (
-              <p>No image set for this poduct.</p>
+              <p>No image set for this destination.</p>
             )}
           </Card>
           <label>Destination Name:</label>
@@ -46,6 +48,15 @@ const DestinationForm = ({
             name="name"
             value={destination?.name}
             onChange={handleInputChange}
+          />
+
+          <label>Country:</label>
+          <input
+            type="text"
+            placeholder="Country"
+            name="country"
+            value={country}
+            onChange={handleCountryChange}
           />
 
           <label>Destination things to do:</label>
@@ -76,6 +87,9 @@ const DestinationForm = ({
     </div>
   );
 };
+
+
+
 
 DestinationForm.modules = {
   toolbar: [

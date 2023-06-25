@@ -5,10 +5,10 @@ const { fileSizeFormatter } = require("../utils/fileUpload");
 const cloudinary = require("cloudinary").v2
 
 const addDestination = asyncHandler( async (req, res) => {
-    const {name, description, things_to_do} = req.body
+    const {name, country, description, things_to_do} = req.body
 
     //Validation
-    if(!name || !description || !things_to_do){
+    if(!name || !country || !description || !things_to_do){
         res.status(400)
         throw new Error("Fill all the fields")
     }
@@ -39,6 +39,7 @@ const addDestination = asyncHandler( async (req, res) => {
     //add destinaion
     const destination = await Destination.create({
         name: name,
+        country: country,
         description: description,
         things_to_do: things_to_do,
         image: fileData,

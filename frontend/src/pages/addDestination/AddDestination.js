@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   name: "",
+  country: "",
 };
 
 const AddDestination = () => {
@@ -23,11 +24,16 @@ const AddDestination = () => {
 
   const isLoading = useSelector(selectIsLoading);
 
-  const { name } = destination;
+  const { name, country } = destination;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setDestination({ ...destination, [name]: value });
+  };
+
+  const handleCountryChange = (e) => {
+    const { value } = e.target;
+    setDestination({ ...destination, country: value });
   };
 
   const handleImageChange = (e) => {
@@ -35,16 +41,14 @@ const AddDestination = () => {
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
-
   const saveDestination = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
+    formData.append("country", country);
     formData.append("things_to_do", things_to_do);
     formData.append("description", description);
     formData.append("image", destinationImage);
-
-    console.log(...formData);
 
     await dispatch(createDestination(formData));
 
@@ -63,6 +67,8 @@ const AddDestination = () => {
         setThings_to_do={setThings_to_do}
         description={description}
         setDescription={setDescription}
+        country={country}
+        handleCountryChange={handleCountryChange}
         handleInputChange={handleInputChange}
         handleImageChange={handleImageChange}
         saveDestination={saveDestination}
